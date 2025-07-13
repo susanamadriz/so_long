@@ -33,11 +33,11 @@ char **read_map(char *archivo)
 	int fd;
 	char **map;
 	int i;
-	int len;
+	int len; 
 	char *linea;
 
 	i = 0;
-	map = malloc(len + 1 * sizeof(char *));
+	map = malloc(len + 1 * sizeof(char *)); //no está inicializado len
 	if (!map)
 		return (NULL);
 	fd = open(archivo, O_RDONLY);
@@ -80,3 +80,16 @@ int char_check(char **map)
 	}
 	return (0);
 }
+
+//Se puede llegar al collentible
+
+int collect_check(char **map)
+{
+	int i;
+	int y;
+
+	int i = 0;
+	int y = 0;
+	if (!map)
+		return(1);
+	
