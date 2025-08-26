@@ -6,13 +6,14 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/02/08 20:17:25 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:58:57 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-// El archivo tiene que estar previamente comporbado
-// Leer el mapa original para luego poder modificarlo en cada movimiento
+// ------------------------------------------------------------
+// Cuenta cuántas líneas tiene el archivo (cantidad de filas)
+// ------------------------------------------------------------
 int count_map(char *archivo)
 {
 	int fd;
@@ -24,35 +25,54 @@ int count_map(char *archivo)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		len++;
+		free(line);
 	}
 	close (fd);
 	return (len);
 }
-char **read_map(char *archivo)
+// ------------------------------------------------------------
+// Lee el archivo .ber y lo guarda en un char **
+// ------------------------------------------------------------
+static char	*clean_line(char *linea)
 {
-	int fd;
-	char **map;
-	int i;
-	int len;
-	char *linea;
+	int	l;
 
-	i = 0;
-	map = malloc(len + 1 * sizeof(char *));
+	if (!linea)
+		return (NULL);
+	l = ft_strlen(linea);
+	if (l > 0 && linea[l - 1] == '\n')
+		return (ft_substr(linea, 0, l - 1));
+	return (ft_strdup(linea));
+}
+char	**read_map(char *archivo)
+{
+	int		fd;
+	int		i;
+	int		len;
+	char	*linea;
+	char	**map;
+
+	len = count_map(archivo);
+	if (len <= 0)
+		return (NULL);
+	map = malloc((len + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	fd = open(archivo, O_RDONLY);
-	len = count_map(archivo);
-	while (i < len)
+	if (fd < 0)
+		return (NULL);
+	i = 0;
+	linea = get_next_line(fd);
+	while (linea)
 	{
+		map[i++] = clean_line(linea);
+		free(linea);
 		linea = get_next_line(fd);
-		map[i] = ft_substr(linea, 0, ft_strlen(linea) - 1);
-		i++;
 	}
 	map[i] = NULL;
 	close(fd);
 	return (map);
 }
-
 // VERIFICACION MAPA ##
 
 int char_check(char **map)
@@ -76,6 +96,23 @@ int char_check(char **map)
 				return (1);
 			y++;
 		}
+		i++;
+	}
+	return (0);
+}
+int square_check(char **map)
+{
+	int i;
+	int y;
+	int len;
+
+	i = 0;
+	y = 0;
+	len = ft_strlen(map[0]);
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) != len)
+			return (1);
 		i++;
 	}
 	return (0);
