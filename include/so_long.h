@@ -6,38 +6,49 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/02/08 20:16:32 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:39:23 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "MLX42/include/MLX42/MLX42.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "get_next_line/get_next_line.h"
+# include "MLX42/MLX42.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "get_next_line.h"
+
+# define TILE 64
 
 typedef struct s_map {
-    char **grid;
-    int width;
-    int height;
-} t_map;
+    char    **grid;
+    int     width;
+    int     height;
+}   t_map;
 
-// Declara las funciones en este archivo
+typedef struct s_game {
+    mlx_t       *mlx;
+    mlx_image_t *img_player;
+    mlx_image_t *img_wall;
+    mlx_image_t *img_floor;
+    mlx_image_t *img_exit;
+    mlx_image_t *img_collect;
+    t_map       *map;
+    int         player_x;
+    int         player_y;
+    int         moves;
+}   t_game;
 
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-int char_check(char **map);
+// utils.c
+int     ft_arrlen(char **arr);
 
-t_map *load_map(const char *filename);
-int validate_map(t_map *map);
-char ** read_map(char *archivo);
-int count_map(char *archivo);
+// map.c
+char    **read_map(char *file);
+int     count_map(char *file);
+
+// so_long.c
+void    draw_map(t_game *game);
+void    hook(void *param);
 
 #endif

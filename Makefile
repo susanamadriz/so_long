@@ -6,68 +6,68 @@
 #    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/02/08 19:22:45 by sjuan-ma         ###   ########.fr        #
+#    Updated: 2025/09/03 19:42:58 by sjuan-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
- gcc:
-	gcc *.c get_next_line/*.c MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm 
-# -g3 -fsanitize=address
-	
-# MAKEFLAGS	= --no-print-directory --silent
+#  gcc:
+# 	gcc src/*.c get_next_line/*.c MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm -o so_long 
 
-# NAME	 = so_long
+# ------------------------------
+# VARIABLES
+# ------------------------------
+NAME    = so_long
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror
 
-# CC = cc
+MLX42   = MLX42/build/libmlx42.a
+LIBS    = -ldl -lglfw -pthread -lm
 
-# CFLAGS	 =	-Wextra -Wall -Werror -Wunreachable-code
-# CFLAGS	 += -I includes
-# CFLAGS	 += -I libft
-# CFLAGS	 += -I GNL
-# CFLAGS	 += -O3
+INCLUDES = -Iinclude -Iget_next_line -IMLX42/include
 
-# DEBUG	 =	-g3 -fsanitize=address
+# ------------------------------
+# FUENTES
+# ------------------------------
+SRC_DIR = src
+GNL_DIR = get_next_line
 
-# CPPFLAGS =	-MMD
+SRC = $(SRC_DIR)/so_long.c \
+      $(SRC_DIR)/map.c \
+      $(SRC_DIR)/utils.c \
+      $(GNL_DIR)/get_next_line.c \
+      $(GNL_DIR)/get_next_line_utils.c
 
-# LIBMLX	= ./libs/MLX42
-# LIBFT	= ./libs/libft
+OBJ_DIR = obj
+OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
-# HEADERS = -I ./includes -I $(LIBMLX)/include -I $(LIBFT)
+# ------------------------------
+# REGLAS
+# ------------------------------
+all: $(NAME)
 
-# LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# LIBS	+=	$(LIBFT)/libft.a
+# Compilar el ejecutable
+$(NAME): $(OBJ) $(MLX42)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBS) -o $(NAME)
 
-# SRC = main.c so_long.c graphics.c map.c player.c
+# Compilar los .c a .o dentro de obj/
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# OBJS = $(patsubst %.c, objs/%.o, $(SRC))
-# DEPS = $(OBJS:.o=.d)
+$(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# all: $(NAME)
+# Limpiar objetos
+clean:
+	rm -rf $(OBJ_DIR)
 
-# libmlx:
-# 	@cmake -DDEBUG=0 $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+# Limpiar objetos y binario
+fclean: clean
+	rm -f $(NAME)
 
-# libft:
-# 	@make -C $(LIBFT)
+# Recompilar todo
+re: fclean all
 
-# $(NAME): $(OBJS) libmlx libft
-# 	$(CC) $(DEBUG) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) && printf "Linking: $(NAME)\n"
+.PHONY: all clean fclean re
 
-# objs/%.o: %.c
-# 	@mkdir -p $(dir $@)
-# 	@$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
-
-# clean:
-# 	@rm -rf objs
-# 	@rm -rf $(LIBMLX)/build
-# 	@make fclean -C $(LIBFT)
-
-# fclean: clean
-# 	@rm -rf $(NAME)
-
-# re: fclean all
-
-# -include $(DEPS)
-
-# .PHONY: all clean fclean re libmlx libft
