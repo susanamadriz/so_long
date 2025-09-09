@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/03 19:39:23 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:58:07 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ typedef struct s_game {
     int         player_x;
     int         player_y;
     int         moves;
+    int         collectibles; // 👈 cantidad de collectibles restantes
 }   t_game;
+
+// hook.c
+void my_keyhook(mlx_key_data_t keydata, void *param);
 
 // utils.c
 int     ft_arrlen(char **arr);
@@ -50,5 +54,8 @@ int     count_map(char *file);
 // so_long.c
 void    draw_map(t_game *game);
 void    hook(void *param);
+
+// moves.c
+void    move_player(t_game *game, int dx, int dy);
 
 #endif
