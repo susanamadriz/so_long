@@ -6,7 +6,7 @@
 #    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/09/03 19:42:58 by sjuan-ma         ###   ########.fr        #
+#    Updated: 2025/09/09 17:51:50 by sjuan-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ GNL_DIR = get_next_line
 
 SRC = $(SRC_DIR)/so_long.c \
       $(SRC_DIR)/map.c \
+      $(SRC_DIR)/hook.c \
       $(SRC_DIR)/utils.c \
+      $(SRC_DIR)/moves.c \
       $(GNL_DIR)/get_next_line.c \
       $(GNL_DIR)/get_next_line_utils.c
 
