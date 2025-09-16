@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/09 18:31:00 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:46:33 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,9 @@ int main(int argc, char **argv)
     game.img_collect = mlx_texture_to_image(game.mlx, tex);
 
     draw_map(&game);
-
     // Usamos el hook de teclado
     mlx_key_hook(game.mlx, &my_keyhook, &game);
-
+    
     mlx_loop(game.mlx);
     mlx_terminate(game.mlx);
     return (0);
