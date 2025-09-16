@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:53:02 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/09 18:17:42 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:53:13 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void draw_tile(t_game *game, int x, int y)
         mlx_image_to_window(game->mlx, game->img_exit, x * TILE, y * TILE);
 }
 
-void draw_map(t_game *game)
+void draw_map_render(t_game *game)
 {
     int x, y;
 

@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/09 17:58:07 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:48:42 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void    hook(void *param);
 
 // moves.c
 void    move_player(t_game *game, int dx, int dy);
+
+// render.c
+void    draw_map_render(t_game *game);
 
 #endif
