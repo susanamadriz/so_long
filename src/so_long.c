@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/16 18:46:33 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/25 17:06:05 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int main(int argc, char **argv)
 
     if (argc != 2)
         return (printf("Formato: ./so_long <mapa.ber>\n"), 1);
-
+        
     game.map = malloc(sizeof(t_map));
+    if (!game.map)
+        return (1);
     game.map->grid = read_map(argv[1]);
     if (!game.map->grid)
         return (printf("Error: no se pudo leer el mapa\n"), 1);
@@ -99,7 +101,6 @@ int main(int argc, char **argv)
 
     tex = mlx_load_png("assets/collectible.png");
     game.img_collect = mlx_texture_to_image(game.mlx, tex);
-
     draw_map(&game);
     // Usamos el hook de teclado
     mlx_key_hook(game.mlx, &my_keyhook, &game);

@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"mlx42.h": "c",
+		"fucionaba": "c",
+		"atomic": "c",
+		"ostream": "c"
+	}
+}
