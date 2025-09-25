@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/16 18:48:42 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:17:36 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ int     count_map(char *file);
 
 // so_long.c
 void    draw_map(t_game *game);
-void    hook(void *param);
 
 // moves.c
 void    move_player(t_game *game, int dx, int dy);
 
 // render.c
 void    draw_map_render(t_game *game);
+
+/* validate_map.c */
+int     validate_map_full(t_map *map, int *start_x, int *start_y);
+void    free_map(char **map);
 
 #endif

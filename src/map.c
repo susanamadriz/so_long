@@ -6,69 +6,77 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/09 18:22:56 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:15:13 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+static char *ignore_empty(char *line)
+{
+	if (!line)
+		return (NULL);
+	int len = strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	// quitar espacios al inicio y al final
+	int start = 0;
+	while (line[start] && (line[start] == ' ' || line[start] == '\t'))
+		start++;
+	if (line[start] == '\0')
+	{
+		free(line);
+		return (NULL);
+	}
+	return line + start; // devuelve línea limpia
+}
 
 int count_map(char *file)
 {
-    int     fd;
-    int     len;
-    char    *line;
+	int fd;
+	int len;
+	char *line;
 
-    fd = open(file, O_RDONLY);
-    if (fd < 0)
-        return (0);
-    len = 0;
-    line = get_next_line(fd);
-    while (line)
-    {
-        len++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    close(fd);
-    return (len);
-}
-
-static char *clean_line(char *line)
-{
-    int l;
-
-    if (!line)
-        return (NULL);
-    l = strlen(line);
-    if (l > 0 && line[l - 1] == '\n')
-        line[l - 1] = '\0';
-    return (line);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	len = 0;
+	while ((line = get_next_line(fd)))
+	{
+		if (ignore_empty(line))
+			len++;
+	}
+	close(fd);
+	return (len);
 }
 
 char **read_map(char *file)
 {
-    int     fd;
-    int     i;
-    int     len;
-    char    *line;
-    char    **map;
+	int fd;
+	char **map;
+	char *line;
+	int i;
 
-    len = count_map(file);
-    if (len <= 0)
-        return (NULL);
-    fd = open(file, O_RDONLY);
-    if (fd < 0)
-        return (NULL);
-    map = malloc((len + 1) * sizeof(char *));
-    i = 0;
-    line = get_next_line(fd);
-    while (line)
-    {
-        map[i++] = clean_line(line);
-        line = get_next_line(fd);
-    }
-    map[i] = NULL;
-    close(fd);
-    return (map);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	map = malloc(sizeof(char *) * (count_map(file) + 1));
+	if (!map)
+		return (NULL);
+	i = 0;
+	while ((line = get_next_line(fd)))
+	{
+		line = ignore_empty(line);
+		if (line)
+			map[i++] = line;
+	}
+	close(fd);
+	map[i] = NULL;
+	if (i == 0)
+		return (free(map), NULL);
+	return (map);
 }
