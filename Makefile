@@ -6,7 +6,7 @@
 #    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/09/16 17:53:16 by sjuan-ma         ###   ########.fr        #
+#    Updated: 2025/09/26 16:50:40 by sjuan-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC = $(SRC_DIR)/so_long.c \
       $(SRC_DIR)/moves.c \
       $(GNL_DIR)/get_next_line.c \
       $(GNL_DIR)/get_next_line_utils.c \
-	  $(SRC_DIR)/render.c
+	  $(SRC_DIR)/render.c \
+	  $(SRC_DIR)/validate_map.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))

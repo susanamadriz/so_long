@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/25 20:17:36 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:09:56 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 
 # define TILE 64
 
-typedef struct s_map {
+typedef struct s_map
+{
     char    **grid;
     int     width;
     int     height;
 }   t_map;
 
-typedef struct s_game {
+typedef struct s_game 
+{
     mlx_t       *mlx;
     mlx_image_t *img_player;
     mlx_image_t *img_wall;
@@ -46,6 +48,7 @@ void my_keyhook(mlx_key_data_t keydata, void *param);
 
 // utils.c
 int     ft_arrlen(char **arr);
+int     check_ber(const char *filename);
 
 // map.c
 char    **read_map(char *file);
@@ -63,5 +66,7 @@ void    draw_map_render(t_game *game);
 /* validate_map.c */
 int     validate_map_full(t_map *map, int *start_x, int *start_y);
 void    free_map(char **map);
+
+void draw_map(t_game *game);
 
 #endif
