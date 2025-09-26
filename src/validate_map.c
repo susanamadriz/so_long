@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/25 19:49:42 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:07:18 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,14 @@ static int check_path(t_map *map, int sx, int sy)
 
 int validate_map_full(t_map *map, int *start_x, int *start_y)
 {
-    if (check_rectangular(map)) return (1);
-    if (check_borders(map)) return (1);
-    if (check_chars_counts(map, start_x, start_y)) return (1);
-    if (check_path(map, *start_x, *start_y)) return (1);
+    if (check_rectangular(map)) 
+        return (1);
+    if (check_borders(map))
+        return (1);
+    if (check_chars_counts(map, start_x, start_y))
+        return (1);
+    if (check_path(map, *start_x, *start_y))
+        return (1);
     return (0);
 }
 
