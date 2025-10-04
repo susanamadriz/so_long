@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/26 17:06:24 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/04 13:53:06 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void draw_map(t_game *game)
                 mlx_image_to_window(game->mlx, game->img_exit, x * TILE, y * TILE);
             else if (game->map->grid[y][x] == 'C')
                 mlx_image_to_window(game->mlx, game->img_collect, x * TILE, y * TILE);
-
             x++;
         }
         y++;
