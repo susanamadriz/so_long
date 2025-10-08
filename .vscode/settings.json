@@ -3,6 +3,7 @@
 		"mlx42.h": "c",
 		"fucionaba": "c",
 		"atomic": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"COMPARE.C": "cpp"
 	}
 }

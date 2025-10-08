@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/04 13:53:06 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:56:58 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,12 @@ int main(int argc, char **argv)
 
     if (setup_game(argc, argv, &game))
         return (1);
+    if (validate_map_full(game.map, &game.player_x, &game.player_y))
+    {
+        free_map(game.map->grid);
+        free(game.map);
+        return (1);
+    }
     if (init_graphics(&game))
     {
         free_map(game.map->grid);

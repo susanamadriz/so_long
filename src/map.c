@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/04 13:45:45 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:56:34 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,6 @@
 #include <string.h>
 #include <stdio.h>
 
-int char_check(char **map)
-{
-	int i;
-	int y;
-	// char *valid;
-
-	// valid = "01CEP";
-		
-	i = 0;
-	y = 0;
-	if (!map)
-		return(1);
-	while (map[i])
-	{
-		while (map[i][y])
-		{
-			if (map[i][y] != '0' || map[i][y] != '1' || map[i][y] != 'C' ||
-				 map[i][y] != 'E' || map[i][y] != 'P')
-				return (1);
-			y++;
-		}
-		i++;
-	}
-	return (0);
-}
 
 static char *ignore_empty(char *line)
 {
