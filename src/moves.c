@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
+/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/10 18:48:02 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/09/25 20:16:43 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void handle_collectible(t_game *game, int nx, int ny)
 {
 	if (game->map->grid[ny][nx] == 'C')
 	{
-		printf("colectible en (%d,%d)\n", nx, ny);
 		game->map->grid[ny][nx] = '0';
 		game->collectibles--;
 		printf("[DEBUG] Coleccionable tomado en (%d,%d). Quedan: %d\n",
