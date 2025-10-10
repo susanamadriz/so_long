@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/08 19:23:09 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/10 19:30:45 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int check_chars_counts(t_map *map, int *sx, int *sy)
             char ch = map->grid[y][x];
             if (ch != '0' && ch != '1' && ch != 'C' && ch != 'E' && ch != 'P')
                 return (print_error("Caracter inválido en el mapa."));
-            printf ("SI COMPRUEBA\n");
+            // printf ("SI COMPRUEBA\n");
             if (ch == 'P') { pcount++; *sx = x; *sy = y; }
             if (ch == 'E') ecount++;
             if (ch == 'C') ccount++;
@@ -139,6 +139,15 @@ static int check_path(t_map *map, int sx, int sy)
 
 int validate_map_full(t_map *map, int *start_x, int *start_y)
 {
+    
+    // map = malloc(sizeof(t_map));
+    // if (!map)
+    //     return (print_error("Error al asignar memoria para el mapa."));
+    
+    // map->grid = map_data;
+    // map->width = strlen(map_data[0]);
+    // map->height = ft_arrlen(map_data);
+    
     if (check_rectangular(map))
         return (1);
     if (check_borders(map))
@@ -147,8 +156,10 @@ int validate_map_full(t_map *map, int *start_x, int *start_y)
         return (1);
     if (check_path(map, *start_x, *start_y))
         return (1);
+    
     return (0);
 }
+
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/04 13:46:25 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/10 19:30:27 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void    move_player(t_game *game, int dx, int dy);
 void    draw_map_render(t_game *game);
 
 /* validate_map.c */
-int char_check(char **map);
-int     validate_map_full(t_map *map, int *start_x, int *start_y);
+int     char_check(char **map);
+int validate_map_full(t_map *map, int *start_x, int *start_y);
 void    free_map(char **map);
 
 void draw_map(t_game *game);

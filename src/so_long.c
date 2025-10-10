@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/08 19:56:58 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/10 19:29:57 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,26 @@ static void run_game(t_game *game)
 int main(int argc, char **argv)
 {
     t_game game;
+	t_map *map;
+	// char **map;
 
-    if (setup_game(argc, argv, &game))
+	if (setup_game(argc, argv, &game))
         return (1);
-    if (validate_map_full(game.map, &game.player_x, &game.player_y))
+		
+	// map = read_map(argv[1]);
+	
+	// if (!map)
+	// 	return (1);
+		map = malloc(sizeof(t_map));
+	if (!map)
+		return (printf("Error\nmalloc\n"), 1);
+	map->grid = read_map(argv[1]);
+	if (!map->grid)
+		return (printf("Error: no se pudo leer el mapa\n"), 1);
+	map->width = strlen(map->grid[0]);
+	map->height = ft_arrlen(map->grid);
+		
+	if (validate_map_full(map, &game.player_x, &game.player_y))
     {
         free_map(game.map->grid);
         free(game.map);
