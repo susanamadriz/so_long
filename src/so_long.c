@@ -6,36 +6,37 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/10 20:52:00 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/11 23:53:40 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void draw_map(t_game *game)
+void	draw_map(t_game *game)
 {
-    int x, y;
+	int	x;
+	int	y;
 
-    y = 0;
-    while (y < game->map->height)
-    {
-        x = 0;
-        while (x < game->map->width)
-        {
-            mlx_image_to_window(game->mlx, game->img_floor, x * TILE, y * TILE);
-            if (game->map->grid[y][x] == '1')
-                mlx_image_to_window(game->mlx, game->img_wall, x * TILE, y * TILE);
-            else if (game->map->grid[y][x] == 'E' && game->collectibles == 0)
-                mlx_image_to_window(game->mlx, game->img_exit, x * TILE, y * TILE);
-            else if (game->map->grid[y][x] == 'C')
-                mlx_image_to_window(game->mlx, game->img_collect, x * TILE, y * TILE);
-            x++;
-        }
-        y++;
-    }
-    mlx_image_to_window(game->mlx, game->img_player,
-                        game->player_x * TILE,
-                        game->player_y * TILE);
+	y = 0;
+	while (y < game->map->height)
+	{
+		x = 0;
+		while (x < game->map->width)
+		{
+			mlx_image_to_window(game->mlx, game->img_floor, x * TILE, y * TILE);
+			if (game->map->grid[y][x] == '1')
+				mlx_image_to_window(game->mlx, game->img_wall, x * TILE, y * TILE);
+			else if (game->map->grid[y][x] == 'E' && game->collectibles == 0)
+				mlx_image_to_window(game->mlx, game->img_exit, x * TILE, y * TILE);
+			else if (game->map->grid[y][x] == 'C')
+				mlx_image_to_window(game->mlx, game->img_collect, x * TILE, y * TILE);
+			x++;
+		}
+		y++;
+	}
+ 	mlx_image_to_window(game->mlx, game->img_player,
+						game->player_x * TILE,
+						game->player_y * TILE);
 }
 
 
@@ -120,12 +121,12 @@ static int setup_game(int argc, char **argv, t_game *game)
 	return (0);
 }
 
-static int init_graphics(t_game *game)
+static int	init_graphics(t_game *game)
 {
-	mlx_texture_t *tex;
+	mlx_texture_t	*tex;
 
 	game->mlx = mlx_init(game->map->width * TILE, game->map->height * TILE,
-	                    "so_long", true);
+						"so_long", true);
 	if (!game->mlx)
 		return (printf("Error iniciando MLX\n"), 1);
 	tex = mlx_load_png("assets/player.png");
@@ -141,10 +142,10 @@ static int init_graphics(t_game *game)
 	return (0);
 }
 
-static void run_game(t_game *game)
+static void	run_game(t_game *game)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	/* contar collectibles */
 	y = -1;
@@ -162,10 +163,11 @@ static void run_game(t_game *game)
 	free_map(game->map->grid);
 	free(game->map);
 }
-int main(int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
-    t_game game;
-	t_map *map;
+	t_game	game;
+	t_map	*map;
 	// char **map;
 
 	if (setup_game(argc, argv, &game))
@@ -183,19 +185,19 @@ int main(int argc, char **argv)
 		return (printf("Error: no se pudo leer el mapa\n"), 1);
 	map->width = strlen(map->grid[0]);
 	map->height = ft_arrlen(map->grid);
-		
+
 	if (validate_map_full(map, &game.player_x, &game.player_y))
-    {
-        free_map(game.map->grid);
-        free(game.map);
-        return (1);
-    }
-    if (init_graphics(&game))
-    {
-        free_map(game.map->grid);
-        free(game.map);
-        return (1);
-    }
-    run_game(&game);
-    return (0);
+	{
+		free_map(game.map->grid);
+		free(game.map);
+		return (1);
+	}
+	if (init_graphics(&game))
+	{
+		free_map(game.map->grid);
+		free(game.map);
+		return (1);
+	}
+	run_game(&game);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/04 13:45:45 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/11 23:44:47 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,21 @@
 #include <string.h>
 #include <stdio.h>
 
-int char_check(char **map)
+int	char_check(char **map)
 {
-	int i;
-	int y;
-	// char *valid;
+	int	i;
+	int	y;
 
-	// valid = "01CEP";
-		
 	i = 0;
 	y = 0;
 	if (!map)
-		return(1);
+		return (1);
 	while (map[i])
 	{
 		while (map[i][y])
 		{
 			if (map[i][y] != '0' || map[i][y] != '1' || map[i][y] != 'C' ||
-				 map[i][y] != 'E' || map[i][y] != 'P')
+				map[i][y] != 'E' || map[i][y] != 'P')
 				return (1);
 			y++;
 		}
@@ -42,15 +39,17 @@ int char_check(char **map)
 	return (0);
 }
 
-static char *ignore_empty(char *line)
+static char	*ignore_empty(char *line)
 {
+	int	len;
+	int	start;
+
+	start = 0;
+	len = strlen(line);
 	if (!line)
 		return (NULL);
-	int len = strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
-	// quitar espacios al inicio y al final
-	int start = 0;
 	while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 		start++;
 	if (line[start] == '\0')
@@ -58,15 +57,15 @@ static char *ignore_empty(char *line)
 		free(line);
 		return (NULL);
 	}
-	return line + start; // devuelve línea limpia
+	return (line + start);
 }
 
 
-int count_map(char *file)
+int	count_map(char *file)
 {
-	int fd;
-	int len;
-	char *line;
+	int		fd;
+	int		len;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -81,12 +80,12 @@ int count_map(char *file)
 	return (len);
 }
 
-char **read_map(char *file)
+char	**read_map(char *file)
 {
-	int fd;
-	char **map;
-	char *line;
-	int i;
+	int		fd;
+	char	**map;
+	char	*line;
+	int		i;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)

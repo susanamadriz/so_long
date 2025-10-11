@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/09/25 20:16:43 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/11 23:46:39 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void reveal_exits(t_game *game)
+static void	reveal_exits(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->map->height)
@@ -31,7 +31,7 @@ static void reveal_exits(t_game *game)
 	}
 }
 
-static void handle_collectible(t_game *game, int nx, int ny)
+static void	handle_collectible(t_game *game, int nx, int ny)
 {
 	if (game->map->grid[ny][nx] == 'C')
 	{
@@ -39,7 +39,7 @@ static void handle_collectible(t_game *game, int nx, int ny)
 		game->collectibles--;
 		printf("[DEBUG] Coleccionable tomado en (%d,%d). Quedan: %d\n",
 		       nx, ny, game->collectibles);
-		/* redibujar suelo donde estaba el collectible */
+
 		mlx_image_to_window(game->mlx, game->img_floor, nx * TILE, ny * TILE);
 		/* si fue el último, mostrar la(s) salida(s) */
 		if (game->collectibles == 0)
@@ -47,7 +47,7 @@ static void handle_collectible(t_game *game, int nx, int ny)
 	}
 }
 
-static int handle_exit(t_game *game, int nx, int ny)
+static int	handle_exit(t_game *game, int nx, int ny)
 {
 	if (game->map->grid[ny][nx] == 'E')
 	{
@@ -61,13 +61,13 @@ static int handle_exit(t_game *game, int nx, int ny)
 	return (0);
 }
 
-void move_player(t_game *game, int dx, int dy)
+void	move_player(t_game *game, int dx, int dy)
 {
-	int nx;
-	int ny;
-	int ox;
-	int oy;
-	char cell;
+	int		nx;
+	int		ny;
+	int		ox;
+	int		oy;
+	char	cell;
 
 	nx = game->player_x + dx;
 	ny = game->player_y + dy;
