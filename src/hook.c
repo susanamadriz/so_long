@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:51:11 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/11 23:38:56 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/12 12:14:58 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 			mlx_close_window(game->mlx);
 	}
 }
-

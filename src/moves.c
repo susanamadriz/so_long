@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/11 23:46:39 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/12 20:56:06 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	handle_collectible(t_game *game, int nx, int ny)
 		game->map->grid[ny][nx] = '0';
 		game->collectibles--;
 		printf("[DEBUG] Coleccionable tomado en (%d,%d). Quedan: %d\n",
-		       nx, ny, game->collectibles);
+			nx, ny, game->collectibles);
 
 		mlx_image_to_window(game->mlx, game->img_floor, nx * TILE, ny * TILE);
 		/* si fue el último, mostrar la(s) salida(s) */
@@ -61,30 +61,38 @@ static int	handle_exit(t_game *game, int nx, int ny)
 	return (0);
 }
 
+static int	can_move_to(t_game *game, int nx, int ny)
+{
+	char	cell;
+
+	if (ny < 0 || ny >= game->map->height)
+		return (0);
+	if (nx < 0 || nx >= game->map->width)
+		return (0);
+	if ((int)strlen(game->map->grid[ny]) <= nx)
+		return (0);
+	cell = game->map->grid[ny][nx];
+	if (cell == '1')
+		return (0);
+	if (cell == 'C')
+		handle_collectible(game, nx, ny);
+	if (handle_exit(game, nx, ny))
+		return (0);
+	return (1);
+}
+
 void	move_player(t_game *game, int dx, int dy)
 {
-	int		nx;
-	int		ny;
-	int		ox;
-	int		oy;
-	char	cell;
+	int	nx;
+	int	ny;
+	int	ox;
+	int	oy;
 
 	nx = game->player_x + dx;
 	ny = game->player_y + dy;
 	ox = game->player_x;
 	oy = game->player_y;
-	if (ny < 0 || ny >= game->map->height)
-		return ;
-	if (nx < 0 || nx >= game->map->width)
-		return ;
-	if ((int)strlen(game->map->grid[ny]) <= nx)
-		return ;
-	cell = game->map->grid[ny][nx];
-	if (cell == '1')
-		return ;
-	if (cell == 'C')
-		handle_collectible(game, nx, ny);
-	if (handle_exit(game, nx, ny))
+	if (!can_move_to(game, nx, ny))
 		return ;
 	/* redibujar suelo en la posición antigua del jugador */
 	mlx_image_to_window(game->mlx, game->img_floor, ox * TILE, oy * TILE);
@@ -93,5 +101,7 @@ void	move_player(t_game *game, int dx, int dy)
 	game->moves++;
 	printf("Movimientos: %d\n", game->moves);
 	/* dibujar jugador en la nueva posición */
-	mlx_image_to_window(game->mlx, game->img_player, game->player_x * TILE, game->player_y * TILE);
+	mlx_image_to_window(game->mlx, game->img_player,
+		game->player_x * TILE, game->player_y * TILE);
 }
+
