@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/12 12:17:52 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/14 00:01:02 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	my_keyhook(mlx_key_data_t keydata, void *param);
 // utils.c
 int		ft_arrlen(char **arr);
 int		check_ber(const char *filename);
+void	free_map(char **map);
+char	**copy_map(t_map *map);
+static int	print_error(const char *msg);
 
 // map.c
 char	**read_map(char *file);
