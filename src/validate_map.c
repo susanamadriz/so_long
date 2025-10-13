@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/12 21:26:36 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/13 23:59:28 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,6 @@
 #include <string.h>
 #include <stdio.h>
 
-static int	print_error(const char *msg)
-{
-	printf("Error\n%s\n", msg);
-	return (1);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free (map);
-}
 
 static int	check_rectangular(t_map *map)
 {
@@ -128,23 +108,7 @@ static void	flood(t_map *map, int x, int y, int *c_reached, int *e_found)
 	flood(map, x, y + 1, c_reached, e_found);
 	flood(map, x, y - 1, c_reached, e_found);
 }
-static char **copy_map(t_map *map)
-{
-	char	**copy;
-	int		y;
 
-	copy = malloc(sizeof(char *) * (map->height + 1));
-	if (!copy)
-		return (NULL);
-	y = 0;
-	while (y < map->height)
-	{
-		copy[y] = strdup(map->grid[y]);
-		y++;
-	}
-	copy[map->height] = NULL;
-	return (copy);
-}
 
 static int check_path(t_map *map, int sx, int sy)
 {
