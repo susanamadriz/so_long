@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:54:52 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/13 23:59:39 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/15 21:15:55 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_ber(const char *filename)
 	return (1);
 }
 
-static char **copy_map(t_map *map)
+char	**copy_map(t_map *map)
 {
 	char	**copy;
 	int		y;
@@ -59,7 +59,7 @@ static char **copy_map(t_map *map)
 	return (copy);
 }
 
-static int	print_error(const char *msg)
+int	print_error(const char *msg)
 {
 	printf("Error\n%s\n", msg);
 	return (1);
@@ -77,5 +77,5 @@ void	free_map(char **map)
 		free(map[i]);
 		i++;
 	}
-	free (map);
+	free(map);
 }

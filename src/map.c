@@ -22,15 +22,15 @@ int	char_check(char **map)
 	int	y;
 
 	i = 0;
-	y = 0;
 	if (!map)
 		return (1);
 	while (map[i])
 	{
+		y = 0;
 		while (map[i][y])
 		{
-			if (map[i][y] != '0' || map[i][y] != '1' || map[i][y] != 'C' ||
-				map[i][y] != 'E' || map[i][y] != 'P')
+			if (map[i][y] != '0' && map[i][y] != '1' && map[i][y] != 'C' &&
+				map[i][y] != 'E' && map[i][y] != 'P')
 				return (1);
 			y++;
 		}

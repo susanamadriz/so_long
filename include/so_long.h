@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/14 00:01:02 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/15 21:25:48 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_arrlen(char **arr);
 int		check_ber(const char *filename);
 void	free_map(char **map);
 char	**copy_map(t_map *map);
-static int	print_error(const char *msg);
+int		print_error(const char *msg);
 
 // map.c
 char	**read_map(char *file);
@@ -70,7 +70,8 @@ void	draw_map_render(t_game *game);
 int		char_check(char **map);
 int		validate_map_full(t_map *map, int *start_x, int *start_y);
 void	free_map(char **map);
-
 void	draw_map(t_game *game);
+int	check_path(t_map *map, int sx, int sy);
+/* helper functions implemented in validate_map.c are internal */
 
 #endif
