@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
+#    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/09/26 16:50:40 by sjuan-ma         ###   ########.fr        #
+#    Updated: 2025/10/17 21:36:58 by susanamadri      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC = $(SRC_DIR)/so_long.c \
       $(GNL_DIR)/get_next_line.c \
       $(GNL_DIR)/get_next_line_utils.c \
 	  $(SRC_DIR)/render.c \
-	  $(SRC_DIR)/validate_map.c
+ 	  $(SRC_DIR)/validate_map.c \
+      $(SRC_DIR)/validate_path.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
