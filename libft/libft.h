@@ -13,10 +13,10 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <stdarg.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -65,6 +65,4 @@ int		ft_hexa_min(unsigned int x);
 int		ft_hexa_mayus(unsigned int X);
 int		ft_put_ptr(void *ptr);
 int		ft_hexa_min_ptr(unsigned long x);
-
-
 #endif

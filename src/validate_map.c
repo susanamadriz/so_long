@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:06:25 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 23:44:01 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,50 @@ static int	check_borders(t_map *map)
 	return (0);
 }
 
-static int	find_player_and_exit(t_map *m, int *sx, int *sy)
+static int	scan_row_counts(t_map *m, int row, int *sx, int *sy)
 {
-	int		y;
 	int		x;
 	char	cell;
 
-	m->p = 0;
-	m->e = 0;
-	y = 0;
-	while (y < m->height)
+	x = 0;
+	while (x < m->width)
 	{
-		x = 0;
-		while (x < m->width)
+		cell = m->grid[row][x];
+		if (cell == 'P')
 		{
-			cell = m->grid[y][x];
-			if (cell == 'P')
-			{
-				m->p++;
-				*sx = x;
-				*sy = y;
-			}
-			else if (cell == 'E')
-				m->e++;
-			else if (cell != '0' && cell != '1' && cell != 'C')
-				return (print_error("Caracter inválido en el mapa."));
-			x++;
+			m->p++;
+			*sx = x;
+			*sy = row;
 		}
-		y++;
+		else if (cell == 'E')
+			m->e++;
+		else if (cell == 'C')
+			m->c++;
+		else if (cell != '0' && cell != '1')
+			return (print_error("Caracter inválido en el mapa."));
+		x++;
 	}
 	return (0);
 }
 
-
-// Función principal que reemplaza a check_chars_counts
-static int check_chars_counts(t_map *m, int *sx, int *sy)
+static int	check_chars_counts(t_map *m, int *sx, int *sy)
 {
-	if (find_player_and_exit(m, sx, sy) != 0)
-		return (-1);
-	m->c = count_collectibles(m);
+	int	y;
+
+	m->p = 0;
+	m->e = 0;
+	m->c = 0;
+	y = 0;
+	while (y < m->height)
+	{
+		if (scan_row_counts(m, y, sx, sy) != 0)
+			return (-1);
+		y++;
+	}
 	if (m->p != 1 || m->e != 1 || m->c < 1)
 		return (print_error("Mapa debe tener 1 'P', 1 'E' y ≥ 1 'C'."));
-
 	return (0);
 }
-
 
 int	validate_map_full(t_map *map, int *start_x, int *start_y)
 {
@@ -111,7 +110,3 @@ int	validate_map_full(t_map *map, int *start_x, int *start_y)
 		return (1);
 	return (0);
 }
-
-
-
-
