@@ -6,14 +6,13 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:18:39 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:08:34 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 18:28:26 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <string.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>

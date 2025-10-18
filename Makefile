@@ -6,7 +6,7 @@
 #    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/18 17:50:20 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/10/18 18:34:56 by susanamadri      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror
 
 MLX42   = MLX42/build/libmlx42.a
+LIBFT   = libft/libft.a
 LIBS    = -ldl -lglfw -pthread -lm
 
 INCLUDES = -Iinclude -Iget_next_line -IMLX42/include
@@ -53,8 +54,12 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 all: $(NAME)
 
 # Compilar el ejecutable
-$(NAME): $(OBJ) $(MLX42) 
-	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBS) -o $(NAME)
+$(NAME): $(OBJ) $(MLX42) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBFT) $(LIBS) -o $(NAME)
+
+# Build libft static library
+$(LIBFT):
+	$(MAKE) -C libft
 
 # Compilar los .c a .o dentro de obj/
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
