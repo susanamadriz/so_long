@@ -6,16 +6,16 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/17 21:36:58 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 18:13:46 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* src/validate_map.c */
 #include "so_long.h"
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
 static int	check_rectangular(t_map *map)
 {
 	int		y;
@@ -94,11 +94,7 @@ static int	check_chars_counts(t_map *m, int *sx, int *sy)
 		return (print_error("Mapa debe tener 1 'P', 1 'E' y ≥1 'C'."));
 	return (0);
 }
-
-
-
 /* path checking functions moved to src/validate_path.c */
-
 int	validate_map_full(t_map *map, int *start_x, int *start_y)
 {
 	if (check_rectangular(map))

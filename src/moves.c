@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/15 21:33:12 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 18:19:19 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	handle_collectible(t_game *game, int nx, int ny)
 	{
 		game->map->grid[ny][nx] = '0';
 		game->collectibles--;
-			printf("[DEBUG] Coleccionable tomado en (%d,%d).\n"
+			ft_printf("[DEBUG] Coleccionable tomado en (%d,%d).\n"
 				"Quedan: %d\n", nx, ny, game->collectibles);
 
 		mlx_image_to_window(game->mlx, game->img_floor, nx * TILE, ny * TILE);
@@ -53,7 +53,7 @@ static int	handle_exit(t_game *game, int nx, int ny)
 	{
 		if (game->collectibles == 0)
 		{
-				printf("¡Ganaste en %d movimientos!\n",
+				ft_printf("¡Ganaste en %d movimientos!\n",
 					game->moves + 1);
 			mlx_close_window(game->mlx);
 			return (1);
@@ -70,7 +70,7 @@ static int	can_move_to(t_game *game, int nx, int ny)
 		return (0);
 	if (nx < 0 || nx >= game->map->width)
 		return (0);
-	if ((int)strlen(game->map->grid[ny]) <= nx)
+	if ((int)ft_strlen(game->map->grid[ny]) <= nx)
 		return (0);
 	cell = game->map->grid[ny][nx];
 	if (cell == '1')
@@ -100,7 +100,7 @@ void	move_player(t_game *game, int dx, int dy)
 	game->player_x = nx;
 	game->player_y = ny;
 	game->moves++;
-	printf("Movimientos: %d\n", game->moves);
+	ft_printf("Movimientos: %d\n", game->moves);
 	/* dibujar jugador en la nueva posición */
 	mlx_image_to_window(game->mlx, game->img_player,
 		game->player_x * TILE, game->player_y * TILE);

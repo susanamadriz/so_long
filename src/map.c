@@ -6,15 +6,11 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/11 23:44:47 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 18:16:16 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 int	char_check(char **map)
 {
@@ -45,7 +41,7 @@ static char	*ignore_empty(char *line)
 	int	start;
 
 	start = 0;
-	len = strlen(line);
+	len = ft_strlen(line);
 	if (!line)
 		return (NULL);
 	if (len > 0 && line[len - 1] == '\n')
