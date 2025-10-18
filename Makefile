@@ -6,7 +6,7 @@
 #    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/18 18:34:56 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/10/18 22:09:12 by susanamadri      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,36 +16,46 @@
 # ------------------------------
 # VARIABLES
 # ------------------------------
+# **************************************************************************** #
+#                                                                              #
+#    Makefile                                                                  #
+#                                                                              #
+# **************************************************************************** #
+
+# **************************************************************************** #
+#                                                                              #
+#    Makefile                                                                  #
+#                                                                              #
+# **************************************************************************** #
+
 NAME    = so_long
 CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror
 
 MLX42   = MLX42/build/libmlx42.a
-LIBFT   = libft/libft.a
+LIBFT_DIR = libft
+LIBFT   = $(LIBFT_DIR)/libft.a
 LIBS    = -ldl -lglfw -pthread -lm
 
-INCLUDES = -Iinclude -Iget_next_line -IMLX42/include
+INCLUDES = -Iinclude -Iget_next_line -Ilibft -IMLX42/include
 
-# ------------------------------
-# FUENTES
-# ------------------------------
 SRC_DIR = src
 GNL_DIR = get_next_line
-LIBFT_DIR = libft
+OBJ_DIR = obj
 
+# Fuentes
 SRC = $(SRC_DIR)/so_long.c \
       $(SRC_DIR)/map.c \
       $(SRC_DIR)/hook.c \
       $(SRC_DIR)/utils.c \
       $(SRC_DIR)/moves.c \
+      $(SRC_DIR)/render.c \
+      $(SRC_DIR)/validate_map.c \
+      $(SRC_DIR)/validate_path.c \
       $(GNL_DIR)/get_next_line.c \
-      $(GNL_DIR)/get_next_line_utils.c \
-	  $(SRC_DIR)/render.c \
- 	  $(SRC_DIR)/validate_map.c \
-      $(SRC_DIR)/validate_path.c
-# ------------------------------
+      $(GNL_DIR)/get_next_line_utils.c
 
-OBJ_DIR = obj
+# Objetos en obj/
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 # ------------------------------
@@ -53,15 +63,15 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 # ------------------------------
 all: $(NAME)
 
-# Compilar el ejecutable
+# Ejecutable
 $(NAME): $(OBJ) $(MLX42) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBFT) $(LIBS) -o $(NAME)
 
-# Build libft static library
+# Compilar libft
 $(LIBFT):
-	$(MAKE) -C libft
+	$(MAKE) -C $(LIBFT_DIR)
 
-# Compilar los .c a .o dentro de obj/
+# Compilar todos los .c a obj/*.o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -70,17 +80,15 @@ $(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
 # Limpiar objetos
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 # Limpiar objetos y binario
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # Recompilar todo
 re: fclean all

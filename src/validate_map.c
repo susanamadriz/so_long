@@ -6,15 +6,11 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:13:46 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 23:06:25 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* src/validate_map.c */
 #include "so_long.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 static int	check_rectangular(t_map *map)
 {
@@ -23,18 +19,17 @@ static int	check_rectangular(t_map *map)
 
 	if (map->height == 0)
 		return (print_error("Mapa vacío."));
-	w = strlen(map->grid[0]);
+	w = ft_strlen(map->grid[0]);
 	y = 0;
 	while (y < map->height)
 	{
-		if (strlen(map->grid[y]) != w)
+		if (ft_strlen(map->grid[y]) != w)
 			return (print_error("Mapa no es rectangular."));
 		y++;
 	}
 	map->width = (int)w;
 	return (0);
 }
-
 
 static int	check_borders(t_map *map)
 {
@@ -58,43 +53,52 @@ static int	check_borders(t_map *map)
 	return (0);
 }
 
-
-static int	check_chars_counts(t_map *m, int *sx, int *sy)
+static int	find_player_and_exit(t_map *m, int *sx, int *sy)
 {
-	int	y;
-	int	x;
-	int	p;
-	int	e;
-	int	c;
+	int		y;
+	int		x;
+	char	cell;
 
-	y = -1;
-	p = 0;
-	e = 0;
-	c = 0;
-	while (++y < m->height)
+	m->p = 0;
+	m->e = 0;
+	y = 0;
+	while (y < m->height)
 	{
-		x = -1;
-		while (++x < m->width)
+		x = 0;
+		while (x < m->width)
 		{
-			if (m->grid[y][x] == 'P')
+			cell = m->grid[y][x];
+			if (cell == 'P')
 			{
-				p++;
+				m->p++;
 				*sx = x;
 				*sy = y;
 			}
-			else if (m->grid[y][x] == 'E')
-				e++;
-			else if (m->grid[y][x] == 'C')
-				c++;
-			else if (m->grid[y][x] != '0' && m->grid[y][x] != '1')
+			else if (cell == 'E')
+				m->e++;
+			else if (cell != '0' && cell != '1' && cell != 'C')
 				return (print_error("Caracter inválido en el mapa."));
+			x++;
 		}
+		y++;
 	}
-	if (p != 1 || e != 1 || c < 1)
-		return (print_error("Mapa debe tener 1 'P', 1 'E' y ≥1 'C'."));
 	return (0);
 }
-/* path checking functions moved to src/validate_path.c */
+
+
+// Función principal que reemplaza a check_chars_counts
+static int check_chars_counts(t_map *m, int *sx, int *sy)
+{
+	if (find_player_and_exit(m, sx, sy) != 0)
+		return (-1);
+	m->c = count_collectibles(m);
+	if (m->p != 1 || m->e != 1 || m->c < 1)
+		return (print_error("Mapa debe tener 1 'P', 1 'E' y ≥ 1 'C'."));
+
+	return (0);
+}
+
+
 int	validate_map_full(t_map *map, int *start_x, int *start_y)
 {
 	if (check_rectangular(map))

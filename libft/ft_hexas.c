@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hexas.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:59:54 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2024/10/02 11:56:11 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:19:46 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_hexa_min(unsigned int x)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:02:33 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/02/08 19:07:04 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 18:40:23 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GET_NEXT_LINE_H
 
 # include <string.h>
-# include <stdio.h> 
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>

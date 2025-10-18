@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:18:39 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:28:26 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 21:29:20 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LIBFT_H
 
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdarg.h>
 
 int		ft_isalpha(int c);
