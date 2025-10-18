@@ -6,7 +6,7 @@
 #    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/17 21:36:58 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/10/18 17:50:20 by susanamadri      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 # VARIABLES
 # ------------------------------
 NAME    = so_long
-CC      = cc
+CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror
 
 MLX42   = MLX42/build/libmlx42.a
@@ -30,6 +30,7 @@ INCLUDES = -Iinclude -Iget_next_line -IMLX42/include
 # ------------------------------
 SRC_DIR = src
 GNL_DIR = get_next_line
+LIBFT_DIR = libft
 
 SRC = $(SRC_DIR)/so_long.c \
       $(SRC_DIR)/map.c \
@@ -41,6 +42,7 @@ SRC = $(SRC_DIR)/so_long.c \
 	  $(SRC_DIR)/render.c \
  	  $(SRC_DIR)/validate_map.c \
       $(SRC_DIR)/validate_path.c
+# ------------------------------
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
@@ -51,7 +53,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 all: $(NAME)
 
 # Compilar el ejecutable
-$(NAME): $(OBJ) $(MLX42)
+$(NAME): $(OBJ) $(MLX42) 
 	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBS) -o $(NAME)
 
 # Compilar los .c a .o dentro de obj/
@@ -60,6 +62,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
