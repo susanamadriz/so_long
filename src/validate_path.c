@@ -65,7 +65,7 @@ int	check_path(t_map *map, int sx, int sy)
 	tmp.grid = copy_map(map);
 	if (!tmp.grid)
 		return (print_error("No se pudo duplicar el mapa"));
-	tmp.width = (int)strlen(tmp.grid[0]);
+	tmp.width = (int)ft_strlen(tmp.grid[0]);
 	tmp.height = ft_arrlen(tmp.grid);
 	c_reached = 0;
 	e_found = 0;
