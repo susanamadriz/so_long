@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:04:05 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2024/02/26 14:04:52 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:48:22 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_itoa(int n)
 	counter = 0;
 	if ((long int)n <= 0)
 		counter++;
-	while ((n_long != 0) && (counter++ >= 0))
+	while ((n_long != 0) && (counter++))
 		n_long = n_long / 10;
 	new = ft_calloc(counter + 1, sizeof(char));
 	if (new == NULL)

@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:54:52 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/15 21:15:55 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 22:24:37 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**copy_map(t_map *map)
 	y = 0;
 	while (y < map->height)
 	{
-		copy[y] = strdup(map->grid[y]);
+		copy[y] = ft_strdup(map->grid[y]);
 		y++;
 	}
 	copy[map->height] = NULL;
@@ -61,7 +61,7 @@ char	**copy_map(t_map *map)
 
 int	print_error(const char *msg)
 {
-	printf("Error\n%s\n", msg);
+	ft_printf("Error\n%s\n", msg);
 	return (1);
 }
 

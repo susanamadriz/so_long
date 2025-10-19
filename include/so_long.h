@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:11:32 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 23:01:44 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "MLX42/MLX42.h"
 # include "../libft/libft.h"
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
@@ -29,6 +28,11 @@ typedef struct s_map
 	char	**grid;
 	int		width;
 	int		height;
+	int		p;
+	int		e;
+	int		c;
+	int		sx;
+	int		sy;
 }	t_map;
 
 typedef struct s_game
@@ -74,7 +78,10 @@ int		char_check(char **map);
 int		validate_map_full(t_map *map, int *start_x, int *start_y);
 void	free_map(char **map);
 void	draw_map(t_game *game);
-int	check_path(t_map *map, int sx, int sy);
+int		check_path(t_map *map, int sx, int sy);
+
+//vaildate_path.c
+int		count_collectibles(t_map *map);
 /* helper functions implemented in validate_map.c are internal */
 
 #endif

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:08:42 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2024/01/14 15:08:58 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:25:19 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
@@ -16,10 +17,10 @@ void	ft_bzero(void *s, size_t n)
 	unsigned char	*z;
 	size_t			count;
 
-	z = s;
+	if (!s || n == 0)
+		return ;
+	z = (unsigned char *)s;
 	count = 0;
-	if (n == 0)
-		return (*s);
 	while (count < n)
 	{
 		z[count] = 0;
