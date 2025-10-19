@@ -6,18 +6,17 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:18:39 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:08:34 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 21:29:20 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <stdarg.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -66,6 +65,4 @@ int		ft_hexa_min(unsigned int x);
 int		ft_hexa_mayus(unsigned int X);
 int		ft_put_ptr(void *ptr);
 int		ft_hexa_min_ptr(unsigned long x);
-
-
 #endif

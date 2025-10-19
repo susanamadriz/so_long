@@ -4,6 +4,7 @@
 		"fucionaba": "c",
 		"atomic": "c",
 		"ostream": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"stdlib.h": "c"
 	}
 }

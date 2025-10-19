@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:18:40 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/03/17 16:49:42 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:50:14 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	check_letter(char letter, va_list args)
 {

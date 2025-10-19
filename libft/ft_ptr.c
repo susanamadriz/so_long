@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ptr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:03:14 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2024/10/02 12:18:55 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:53:45 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_put_ptr(void *ptr)
 {

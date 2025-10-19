@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 18:19:19 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/18 23:00:41 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static void	reveal_exits(t_game *game)
 		while (x < game->map->width)
 		{
 			if (game->map->grid[y][x] == 'E')
-				mlx_image_to_window(game->mlx, game->img_exit, x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx,
+					game->img_exit,
+					x * TILE,
+					y * TILE);
 			x++;
 		}
 		y++;
@@ -37,11 +40,9 @@ static void	handle_collectible(t_game *game, int nx, int ny)
 	{
 		game->map->grid[ny][nx] = '0';
 		game->collectibles--;
-			ft_printf("[DEBUG] Coleccionable tomado en (%d,%d).\n"
-				"Quedan: %d\n", nx, ny, game->collectibles);
-
+		ft_printf("[DEBUG] Coleccionable tomado en (%d,%d).\n", nx, ny);
+		ft_printf("Quedan: %d\n", game->collectibles);
 		mlx_image_to_window(game->mlx, game->img_floor, nx * TILE, ny * TILE);
-		/* si fue el último, mostrar la(s) salida(s) */
 		if (game->collectibles == 0)
 			reveal_exits(game);
 	}
@@ -53,8 +54,8 @@ static int	handle_exit(t_game *game, int nx, int ny)
 	{
 		if (game->collectibles == 0)
 		{
-				ft_printf("¡Ganaste en %d movimientos!\n",
-					game->moves + 1);
+			ft_printf("¡Ganaste en %d movimientos!\n",
+				game->moves + 1);
 			mlx_close_window(game->mlx);
 			return (1);
 		}
@@ -95,14 +96,11 @@ void	move_player(t_game *game, int dx, int dy)
 	oy = game->player_y;
 	if (!can_move_to(game, nx, ny))
 		return ;
-	/* redibujar suelo en la posición antigua del jugador */
 	mlx_image_to_window(game->mlx, game->img_floor, ox * TILE, oy * TILE);
 	game->player_x = nx;
 	game->player_y = ny;
 	game->moves++;
 	ft_printf("Movimientos: %d\n", game->moves);
-	/* dibujar jugador en la nueva posición */
 	mlx_image_to_window(game->mlx, game->img_player,
 		game->player_x * TILE, game->player_y * TILE);
 }
-
