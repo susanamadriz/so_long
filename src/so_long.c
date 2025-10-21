@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 22:14:56 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/19 18:06:02 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,13 @@ int	main(int argc, char **argv)
 
 	if (setup_game(argc, argv, &game))
 		return (1);
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (ft_printf("Error\nmalloc\n"), 1);
-	map->grid = read_map(argv[1]);
-	if (!map->grid)
-		return (ft_printf("Error: no se pudo leer el mapa\n"), 1);
-	map->width = ft_strlen(map->grid[0]);
-	map->height = ft_arrlen(map->grid);
+	map = game.map;
 	if (validate_map_full(map, &game.player_x, &game.player_y))
-		return (free_map(game.map->grid), free(game.map), 1);
+	{
+		free_map(map->grid);
+		free(map);
+		return (1);
+	}
 	if (init_graphics(&game))
 	{
 		free_map(game.map->grid);

@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:01:18 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/21 23:37:25 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ int	count_map(char *file)
 	int		len;
 	char	*line;
 
+	line = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	len = 0;
-	while ((line))
+	while (line)
 	{
 		line = get_next_line(fd);
 		if (ignore_empty(line))
