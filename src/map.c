@@ -90,7 +90,7 @@ char	**read_map(char *file)
 	if (!map)
 		return (NULL);
 	i = 0;
-	while ((line))
+	while (line)
 	{
 		line = get_next_line(fd);
 		line = ignore_empty(line);
