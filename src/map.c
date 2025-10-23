@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:01:18 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/23 23:31:57 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	*ignore_empty(char *line)
 {
 	int	len;
 	int	start;
+	char	*new;
 
 	start = 0;
 	len = ft_strlen(line);
@@ -53,7 +54,11 @@ static char	*ignore_empty(char *line)
 		free(line);
 		return (NULL);
 	}
-	return (line + start);
+	if (start == 0)
+		return (line);
+	new = ft_strdup(line + start);
+	free(line);
+	return (new);
 }
 
 int	count_map(char *file)
@@ -66,11 +71,14 @@ int	count_map(char *file)
 	if (fd < 0)
 		return (0);
 	len = 0;
-	while ((line))
+	while ((line = get_next_line(fd)))
 	{
-		line = get_next_line(fd);
-		if (ignore_empty(line))
+		line = ignore_empty(line);
+		if (line)
+		{
 			len++;
+			free(line);
+		}
 	}
 	close(fd);
 	return (len);
@@ -90,9 +98,8 @@ char	**read_map(char *file)
 	if (!map)
 		return (NULL);
 	i = 0;
-	while (line)
+	while ((line = get_next_line(fd)))
 	{
-		line = get_next_line(fd);
 		line = ignore_empty(line);
 		if (line)
 			map[i++] = line;
