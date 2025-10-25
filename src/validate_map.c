@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:44:01 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 17:33:29 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ static int	check_chars_counts(t_map *m, int *sx, int *sy)
 int	validate_map_full(t_map *map, int *start_x, int *start_y)
 {
 	if (check_rectangular(map))
-		return (1);
+		return (free_map(map->grid), free(map), 1);
 	if (check_borders(map))
-		return (1);
+		return (free_map(map->grid), free(map), 1);
 	if (check_chars_counts(map, start_x, start_y))
-		return (1);
+		return (free_map(map->grid), free(map), 1);
 	if (check_path(map, *start_x, *start_y))
-		return (1);
-	return (0);
+		return (free_map(map->grid), free(map), 1);
+	return (free_map(map->grid), free(map), 0);
 }

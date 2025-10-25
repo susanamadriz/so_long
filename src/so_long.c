@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 22:14:56 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 17:49:15 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static int	setup_game(int argc, char **argv, t_game *game)
 		return (ft_printf("Error\nmalloc\n"), 1);
 	game->map->grid = read_map(argv[1]);
 	if (!game->map->grid)
+	{
+		free(game->map);
 		return (ft_printf("Error: no se pudo leer el mapa\n"), 1);
+	}
 	game->map->width = ft_strlen(game->map->grid[0]);
 	game->map->height = ft_arrlen(game->map->grid);
 	game->player_x = 1;
@@ -61,25 +64,47 @@ static int	setup_game(int argc, char **argv, t_game *game)
 	return (0);
 }
 
-static int	init_graphics(t_game *game)
-{
-	mlx_texture_t	*tex;
 
-	game->mlx = mlx_init(game->map->width * TILE, game->map->height * TILE,
-			"so_long", true);
-	if (!game->mlx)
-		return (ft_printf("Error iniciando MLX\n"), 1);
-	tex = mlx_load_png("assets/player.png");
-	game->img_player = mlx_texture_to_image(game->mlx, tex);
-	tex = mlx_load_png("assets/floor.png");
-	game->img_floor = mlx_texture_to_image(game->mlx, tex);
-	tex = mlx_load_png("assets/wall.png");
-	game->img_wall = mlx_texture_to_image(game->mlx, tex);
-	tex = mlx_load_png("assets/exit.png");
-	game->img_exit = mlx_texture_to_image(game->mlx, tex);
-	tex = mlx_load_png("assets/collectible.png");
-	game->img_collect = mlx_texture_to_image(game->mlx, tex);
-	return (0);
+void	free_game(t_game *game)
+{
+	int i;
+
+	if (!game)
+	return;
+
+	// Liberar el mapa
+	if (game->map)
+	{
+		if (game->map->grid)
+		{
+			for (i = 0; i < game->map->height; i++)
+				free(game->map->grid[i]);
+			free(game->map->grid);
+		}
+		free(game->map);
+	}
+
+		// Liberar imágenes de MLX42
+	if (game->mlx)
+	{	
+		ft_printf("Liberando recursos de MLX42...\n");
+		if (game->img_player)
+			mlx_delete_image(game->mlx, game->img_player);
+		if (game->img_wall)
+			mlx_delete_image(game->mlx, game->img_wall);
+		if (game->img_floor)
+			mlx_delete_image(game->mlx, game->img_floor);
+		if (game->img_exit)
+			mlx_delete_image(game->mlx, game->img_exit);
+		if (game->img_collect)
+			mlx_delete_image(game->mlx, game->img_collect);
+
+        // Cerrar la ventana y liberar el contexto MLX42
+		mlx_terminate(game->mlx);
+	}
+
+    // Finalmente liberar la estructura del juego
+	// free(game);
 }
 
 static void	run_game(t_game *game)
@@ -98,9 +123,7 @@ static void	run_game(t_game *game)
 	draw_map(game);
 	mlx_key_hook(game->mlx, &my_keyhook, game);
 	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
-	free_map(game->map->grid);
-	free(game->map);
+	free_game(game);
 }
 
 int	main(int argc, char **argv)
@@ -115,17 +138,19 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nmalloc\n"), 1);
 	map->grid = read_map(argv[1]);
 	if (!map->grid)
+	{
+		free(map);
 		return (ft_printf("Error: no se pudo leer el mapa\n"), 1);
+	}
 	map->width = ft_strlen(map->grid[0]);
 	map->height = ft_arrlen(map->grid);
 	if (validate_map_full(map, &game.player_x, &game.player_y))
 		return (free_map(game.map->grid), free(game.map), 1);
 	if (init_graphics(&game))
-	{
-		free_map(game.map->grid);
-		free(game.map);
-		return (1);
-	}
+		return (free_map(game.map->grid), free(game.map), 1);
 	run_game(&game);
 	return (0);
 }
+
+
+/////////////////////////////////////

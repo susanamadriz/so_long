@@ -6,7 +6,7 @@
 #    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/19 16:55:30 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/10/25 18:04:33 by susanamadri      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME    = so_long
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror
+CFLAGS  = -Wall -Wextra -Werror # -fsanitize=address -g3
 
 MLX42   = MLX42/build/libmlx42.a
 LIBFT_DIR = libft
@@ -30,6 +30,7 @@ OBJ_DIR = obj
 
 # Fuentes
 SRC = $(SRC_DIR)/so_long.c \
+	  $(SRC_DIR)/init_img.c \
       $(SRC_DIR)/map.c \
       $(SRC_DIR)/hook.c \
       $(SRC_DIR)/utils.c \

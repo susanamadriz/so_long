@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:51:32 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:00:41 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 15:13:03 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	handle_collectible(t_game *game, int nx, int ny)
 	{
 		game->map->grid[ny][nx] = '0';
 		game->collectibles--;
-		ft_printf("[DEBUG] Coleccionable tomado en (%d,%d).\n", nx, ny);
-		ft_printf("Quedan: %d\n", game->collectibles);
 		mlx_image_to_window(game->mlx, game->img_floor, nx * TILE, ny * TILE);
 		if (game->collectibles == 0)
 			reveal_exits(game);
