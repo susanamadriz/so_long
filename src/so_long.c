@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/25 17:49:15 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 18:15:53 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static int	setup_game(int argc, char **argv, t_game *game)
 
 void	free_game(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game)
-	return;
+		return;
 
-	// Liberar el mapa
+	// Liberar mapa
 	if (game->map)
 	{
 		if (game->map->grid)
@@ -82,30 +82,24 @@ void	free_game(t_game *game)
 			free(game->map->grid);
 		}
 		free(game->map);
+		game->map = NULL;
 	}
 
-		// Liberar imágenes de MLX42
+	// Liberar imágenes de MLX42
 	if (game->mlx)
-	{	
+	{
 		ft_printf("Liberando recursos de MLX42...\n");
-		if (game->img_player)
-			mlx_delete_image(game->mlx, game->img_player);
-		if (game->img_wall)
-			mlx_delete_image(game->mlx, game->img_wall);
-		if (game->img_floor)
-			mlx_delete_image(game->mlx, game->img_floor);
-		if (game->img_exit)
-			mlx_delete_image(game->mlx, game->img_exit);
-		if (game->img_collect)
-			mlx_delete_image(game->mlx, game->img_collect);
+		if (game->img_player) mlx_delete_image(game->mlx, game->img_player);
+		if (game->img_wall) mlx_delete_image(game->mlx, game->img_wall);
+		if (game->img_floor) mlx_delete_image(game->mlx, game->img_floor);
+		if (game->img_exit) mlx_delete_image(game->mlx, game->img_exit);
+		if (game->img_collect) mlx_delete_image(game->mlx, game->img_collect);
 
-        // Cerrar la ventana y liberar el contexto MLX42
 		mlx_terminate(game->mlx);
+		game->mlx = NULL;
 	}
-
-    // Finalmente liberar la estructura del juego
-	// free(game);
 }
+
 
 static void	run_game(t_game *game)
 {
