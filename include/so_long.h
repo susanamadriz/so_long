@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/18 23:01:44 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 17:49:59 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param);
 // utils.c
 int		ft_arrlen(char **arr);
 int		check_ber(const char *filename);
-void	free_map(char **map);
+// void	free_map(char **map);
 char	**copy_map(t_map *map);
 int		print_error(const char *msg);
 
@@ -76,12 +76,16 @@ void	draw_map_render(t_game *game);
 /* validate_map.c */
 int		char_check(char **map);
 int		validate_map_full(t_map *map, int *start_x, int *start_y);
-void	free_map(char **map);
+void 	free_map(char **grid);
 void	draw_map(t_game *game);
 int		check_path(t_map *map, int sx, int sy);
 
 //vaildate_path.c
 int		count_collectibles(t_map *map);
+
+//init_img.c
+int		init_graphics(t_game *game);
+int		load_image(t_game *game, const char *file, mlx_image_t **img);
 /* helper functions implemented in validate_map.c are internal */
 
 #endif

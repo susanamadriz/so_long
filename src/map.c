@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/23 23:31:57 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/25 13:58:54 by susanamadri      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ int	char_check(char **map)
 	return (0);
 }
 
-static char	*ignore_empty(char *line)
+char	*ignore_empty(char *line)
 {
-	int	len;
-	int	start;
+	int		len;
+	int		start;
 	char	*new;
 
-	start = 0;
-	len = ft_strlen(line);
 	if (!line)
 		return (NULL);
+	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
+	start = 0;
 	while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 		start++;
 	if (line[start] == '\0')
@@ -71,7 +71,8 @@ int	count_map(char *file)
 	if (fd < 0)
 		return (0);
 	len = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		line = ignore_empty(line);
 		if (line)
@@ -79,6 +80,7 @@ int	count_map(char *file)
 			len++;
 			free(line);
 		}
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (len);
@@ -98,11 +100,13 @@ char	**read_map(char *file)
 	if (!map)
 		return (NULL);
 	i = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		line = ignore_empty(line);
 		if (line)
 			map[i++] = line;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	map[i] = NULL;
