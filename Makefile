@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
+#    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/25 18:04:33 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/10/26 18:30:14 by sjuan-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 # 	gcc src/*.c get_next_line/*.c MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm -o so_long 
 
 NAME    = so_long
-CC      = gcc
+CC      = cc
 CFLAGS  = -Wall -Wextra -Werror # -fsanitize=address -g3
 
 MLX42   = MLX42/build/libmlx42.a
