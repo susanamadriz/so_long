@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
+/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:55:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/25 18:15:53 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/26 18:18:40 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,26 @@ static int	setup_game(int argc, char **argv, t_game *game)
 	return (0);
 }
 
-
 void	free_game(t_game *game)
 {
 	int	i;
 
+	i = 0;
 	if (!game)
-		return;
-
-	// Liberar mapa
+		return ;
 	if (game->map)
 	{
 		if (game->map->grid)
 		{
-			for (i = 0; i < game->map->height; i++)
-				free(game->map->grid[i]);
+			while (i < game->map->height)
+				free(game->map->grid[i++]);
 			free(game->map->grid);
 		}
 		free(game->map);
 		game->map = NULL;
 	}
-
-	// Liberar imágenes de MLX42
-	if (game->mlx)
-	{
-		ft_printf("Liberando recursos de MLX42...\n");
-		if (game->img_player) mlx_delete_image(game->mlx, game->img_player);
-		if (game->img_wall) mlx_delete_image(game->mlx, game->img_wall);
-		if (game->img_floor) mlx_delete_image(game->mlx, game->img_floor);
-		if (game->img_exit) mlx_delete_image(game->mlx, game->img_exit);
-		if (game->img_collect) mlx_delete_image(game->mlx, game->img_collect);
-
-		mlx_terminate(game->mlx);
-		game->mlx = NULL;
-	}
+	free_game2(game);
 }
-
 
 static void	run_game(t_game *game)
 {
@@ -145,6 +129,3 @@ int	main(int argc, char **argv)
 	run_game(&game);
 	return (0);
 }
-
-
-/////////////////////////////////////
