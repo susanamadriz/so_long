@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
+/*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:18:45 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/25 17:56:28 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/10/26 18:19:09 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	load_image(t_game *game, const char *file, mlx_image_t **img)
 {
-	mlx_texture_t	*tex = mlx_load_png(file);
+	mlx_texture_t	*tex;
 
+	tex = mlx_load_png(file);
 	if (!tex)
 		return (ft_printf("Error cargando %s\n", file), 1);
 	*img = mlx_texture_to_image(game->mlx, tex);
@@ -29,7 +30,6 @@ int	init_graphics(t_game *game)
 			"so_long", true);
 	if (!game->mlx)
 		return (ft_printf("Error iniciando MLX\n"), 1);
-
 	if (load_image(game, "assets/player.png", &game->img_player))
 		return (1);
 	if (load_image(game, "assets/floor.png", &game->img_floor))
@@ -40,6 +40,5 @@ int	init_graphics(t_game *game)
 		return (1);
 	if (load_image(game, "assets/collectible.png", &game->img_collect))
 		return (1);
-
 	return (0);
 }
