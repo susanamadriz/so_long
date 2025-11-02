@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+         #
+#    By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 11:19:05 by sjuan-ma          #+#    #+#              #
-#    Updated: 2025/10/28 23:47:57 by susanamadri      ###   ########.fr        #
+#    Updated: 2025/11/02 17:52:13 by sjuan-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,38 +111,45 @@ SRC = $(SRC_DIR)/so_long.c \
       $(GNL_DIR)/get_next_line.c \
       $(GNL_DIR)/get_next_line_utils.c
 
-OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+OBJ = $(OBJ_DIR)/so_long.o \
+      $(OBJ_DIR)/init_img.o \
+      $(OBJ_DIR)/map.o \
+      $(OBJ_DIR)/hook.o \
+      $(OBJ_DIR)/utils.o \
+      $(OBJ_DIR)/moves.o \
+      $(OBJ_DIR)/render.o \
+      $(OBJ_DIR)/validate_map.o \
+      $(OBJ_DIR)/validate_path.o \
+      $(OBJ_DIR)/get_next_line.o \
+      $(OBJ_DIR)/get_next_line_utils.o
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(MLX42) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBFT) $(LIBS) -o $(NAME)
-	@echo "✅ Compilación finalizada."
-
-$(MLX42):
-	@echo "🔧 Construyendo MLX42..."
-	@cmake -B MLX42/build MLX42 >/dev/null
-	@$(MAKE) -C MLX42/build -s
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX42) $(LIBFT) $(LIBS) -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX42):
+	@cmake -B MLX42/build MLX42 > /dev/null 2>&1
+	@make -C MLX42/build > /dev/null 2>&1
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -rf MLX42/build
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
