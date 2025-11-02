@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:37:25 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/25 17:33:29 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/11/02 20:29:48 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ int	validate_map_full(t_map *map, int *start_x, int *start_y)
 		return (free_map(map->grid), free(map), 1);
 	if (check_path(map, *start_x, *start_y))
 		return (free_map(map->grid), free(map), 1);
+	validate_map_fits_window(map);
 	return (free_map(map->grid), free(map), 0);
 }

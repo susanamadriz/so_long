@@ -6,7 +6,7 @@
 /*   By: sjuan-ma <sjuan-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:39:56 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/26 18:19:29 by sjuan-ma         ###   ########.fr       */
+/*   Updated: 2025/11/02 20:34:41 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include "get_next_line.h"
 
 # define TILE 64
+
+# define WINDOW_WIDTH  1920
+# define WINDOW_HEIGHT 1080
 
 typedef struct s_map
 {
@@ -80,6 +83,7 @@ int		validate_map_full(t_map *map, int *start_x, int *start_y);
 void	free_map(char **grid);
 void	draw_map(t_game *game);
 int		check_path(t_map *map, int sx, int sy);
+void	validate_map_fits_window(t_map *map);
 
 //vaildate_path.c
 int		count_collectibles(t_map *map);

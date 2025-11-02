@@ -6,7 +6,7 @@
 /*   By: susanamadriz <susanamadriz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 12:00:00 by sjuan-ma          #+#    #+#             */
-/*   Updated: 2025/10/25 16:33:26 by susanamadri      ###   ########.fr       */
+/*   Updated: 2025/11/02 20:32:15 by sjuan-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,20 @@ int	check_path(t_map *map, int sx, int sy)
 	if (c_reached != total_c)
 		return (print_error("No todos los collectibles son alcanzables."));
 	return (0);
+}
+
+void	validate_map_fits_window(t_map *map)
+{
+	int	map_width;
+	int	map_height;
+
+	map_width = map->width * TILE;
+	map_height = map->height * TILE;
+	if (map_width > WINDOW_WIDTH || map_height > WINDOW_HEIGHT)
+	{
+		ft_printf("Error\nEl mapa excede el tamaño máximo");
+		free_map(map->grid);
+		free(map);
+		exit(EXIT_FAILURE);
+	}
 }
